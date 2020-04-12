@@ -13,16 +13,18 @@ RUN apt-get dist-upgrade -yy --purge && \
     nginx \
     php7.3-fpm \
     mariadb-server \
+    composer \
     && \   
     apt-get clean && \
     apt-get autoremove -yy --purge && \
     rm -rf /var/lib/apt/lists/* \
 		   /var/cache/apt/archives/*.deb \
-		   /var/cache/apt/*cache.bin
-
-# forward request and error logs to docker log collector
-RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
-    ln -sf /dev/stderr /var/log/nginx/error.log
+		   /var/cache/apt/*cache.bin && \
+    # forward request and error logs to docker log collector
+    ln -sf /dev/stdout /var/log/nginx/access.log && \
+    ln -sf /dev/stderr /var/log/nginx/error.log && \
+    # create app directory
+    mkdir -p /opt/app
 
 EXPOSE 80 443
 
