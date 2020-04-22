@@ -15,9 +15,9 @@ services:
       - 9001:80
     volumes:
       # Re-use local composer cache via host-volume
-      #- ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
       # Mount composer auth file
-      #- ./composer-auth.json:/root/.composer/auth.json:ro
+      - ./composer-auth.json:/root/.composer/auth.json:ro
       # Mount source-code for development
       - ./:/opt/app
     networks:
